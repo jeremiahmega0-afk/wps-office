@@ -3125,20 +3125,19 @@ padding-bottom: 5px;
         height: 100%;
     }
 }
-
-@media(max-width:300px) {
+@media(max-width:800px){
     .Product-2 span {
-        padding-left: 69%;
+        padding-left: 79%;
         font-weight: 600;
     }
 
     .Company-2 span {
-        padding-left: 65%;
+        padding-left: 77.5%;
         font-weight: 600;
     }
 
     .Support-2 span {
-        padding-left: 69%;
+        padding-left: 79%;
         font-weight: 600;
     }
 }
@@ -3158,6 +3157,23 @@ padding-bottom: 5px;
         font-weight: 600;
     }
 }
+@media(max-width:300px) {
+    .Product-2 span {
+        padding-left: 69%;
+        font-weight: 600;
+    }
+
+    .Company-2 span {
+        padding-left: 65%;
+        font-weight: 600;
+    }
+
+    .Support-2 span {
+        padding-left: 69%;
+        font-weight: 600;
+    }
+}
+
 .footer-header-33 {
     display: flex;
     align-items: center;

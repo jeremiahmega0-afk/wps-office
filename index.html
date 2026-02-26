@@ -546,64 +546,7 @@
                     // setInterval(() => move(1), 3000);
                      const rapper = document.getElementById('card-33');
 
-        let iDragging = false;
-        let start = 0;
-        let currntTranslate = 0;
-        let prvTranslate = 0;
-        let aniationID = 0;
-
-        // --- INTERACTION LOGIC ---
-
-        const gtPosX = (e) => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-
-        const onStrt = (e) => {
-            iDragging = true;
-            start = gtPosX(e);
-            race.style.transition = 'none'; // Instant drag response
-        };
-
-        const onMve = (e) => {
-            if (!iDragging) return;
-            const currentX = gtPosX(e);
-            const distance = currentX - start;
-            currntTranslate = prvTranslate + distance;
-            
-            // Sync movement with the track
-            race.style.transform = `translateX(${currntTranslate}px)`;
-        };
-
-        const onEd = () => {
-            iDragging = false;
-            race.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
-            // Calculate Boundaries (Prevents scrolling into empty space)
-            const trackWidth = race.scrollWidth;
-            const windowWidth = carouselWindow.offsetWidth;
-            const maxScroll = -(trackWidth - windowWidth + (windowWidth * 0.1));
-
-            if (currntTranslate > 0) {
-                currntTranslate = 0;
-            } else if (currntTranslate < maxScroll) {
-                currntTranslate = maxScroll;
-            }
-
-            race.style.transform = `translateX(${currntTranslate}px)`;
-            prvTranslate = currntTranslate;
-        };
-        // --- EVENT LISTENERS ---
-
-        // Mouse Events
-        race.addEventListener('mousedown', onStrt);
-        race.addEventListener('mousemove', onMve);
-        window.addEventListener('mouseup', onEd);
-
-        // Touch Events (Mobile)
-        race.addEventListener('touchstart', onStrt);
-        race.addEventListener('touchmove', onMve);
-        race.addEventListener('touchend', onEd);
-
-        // Prevent images/text inside from being dragged by browser
-        race.addEventListener('dragstart', (e) => e.preventDefault());
-                </script>
+                      </script>
             </div>
             <div class="grid-contai-2">
                 <div class="UNESCO-ICHEI recommended-applications-by-unesco-ichei">

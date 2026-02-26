@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" href="Css/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+<body>
+    <header>
+        <div>
+            <div>
+
+            </div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+
+    <div class="wps-firt">
+    <div class="wps-firt-div">
+        <img src="Multimedia/ai-wps-office-logo.3a18f52.png" alt="">
+        <h1>AI-Powered Office Suite for Everyone</h1>
+        <p>Smarter, Faster, Easier, Free with Seamless <span style="color: #160F43;">MS</span> <span
+                style="color: #201661;">Office</span> <span style="color: #2F208E;">Compatibility</span></p>
+    </div>
+    <div class="button-first-main-div">
+        <button class="shadow-xl">Free Download <img src="Multimedia/security-icon.55e88b9.svg" alt=""></button>
+        <p>Offline Installer</p>
+    </div>
+    <div class="award-div">
+        <div style="text-align: center;" class="millon">
+            <h5>200 Million</h5>
+            <p style="color: gray;">Users' Choice</p>
+        </div>
+        <div class="aws">
+            <h5>AWS</h5>
+            <b style="color: gray;">Trusted Partner</b>
+        </div>
+        <div class="g2-award">
+            <h5>G2 Award</h5>
+            <p style="color: gray;">Excellent</p>
+        </div>
+    </div>
+    <div class="carousel-window">
+    <div class="grid-warp1" id="flex-track">
+        <div class="doc" style="background-color: #98BCFF;   border-radius: 25px; ">
+            <div style="position:relative;" class="relative">
+                <h3>
+                    <img src="Multimedia/w - Copy.svg" alt="" ><span class="span-1"> Doc ·
+                    </span><span class="span-2">Spell
+                        Check </span><img src="Multimedia/icon-docs-star.486c7b4.svg" alt="">
+                </h3>
+                <p>
+                    Environmental resource management ensures sustainability while <br>
+                    <del style="color: red; font-weight: 600;">diminishing</del> <b
+                        style="color: #0A5FE9;">minimizing</b> negative impacts on the environment. It involves a
+                    holistic approach that considers ecological, economic, and social factors to ensure that resources
+                    are managed in a way that
+                </p>
+                 <button class=" shadow-lg shadow-blue-500/50">
+                    <h3><img
+                            src="Multimedia/icon-desc-star.4fd8f1e.svg" alt=""> Clarity·Ambiguity</h3>
+                </button>
+                </div>
+                <img class="doc-card" src="Multimedia/doc-card-bg-2x-star.d9b64ea.png" alt=""  >
+        </div>
+        <div class="pdf">
+            <h3>
+                <img src="Multimedia/icon-pdf.svg" alt=""><b>PDF</b><span class="pdf-span-1">· Chat</span> <img
+                    src="Multimedia/pdf star.svg" alt="">
+            </h3>
+            <img src="Multimedia/pdf-card-bg-2x.39ec9c5.png" alt="">
+        </div>
+        <div class="ptt" >
+            <h3>
+                <img src="Multimedia/icon-ppt.svg" alt=""><b>Slides</b><span class="ptt-span-1">· AIGC</span> <img
+                    src="Multimedia/icon-ppt-star.30347ce.svg" alt="">
+            </h3>
+            <img src="Multimedia/ppt-card-bg-2x.4429e75.png" alt="">
+        </div>
+        <div class="sheet">
+            <h3>
+                <img src="Multimedia/sheet.svg" alt=""><b>Sheet</b>
+            </h3>
+            <img src="Multimedia/sheet-card-bg-2x.dc945ea.png" alt="">
+        </div>
+        <div class="wps">
+            <h3><img src="Multimedia/wps-photo.svg" alt=""><b>WPS Photos</b><span class="wps-span-1">· Magic</span><img
+                    src="Multimedia/wps star.svg" alt=""></h3>
+            <img src="Multimedia/wsp-card-bg-2x.8cb227d.png" alt="">
+        </div>
+    </div>
+    <script>
+        const rake = document.getElementById('flex-track');
+        const testimonials = document.querySelectorAll('.testimonial');
+        const mql = window.matchMedia('(max-width: 770px)');
+        
+        let Dragging = false, startXm = 0, rentTranslate = 0, Translate = 0;
+        let fadeInterval;
+
+        // --- Effect Logic ---
+        function rotateQuotes() {
+            let active = document.querySelector('.testimonial.active');
+            active.classList.remove('active');
+            let next = active.nextElementSibling || testimonials[0];
+            next.classList.add('active');
+        }
+
+        const getX = (e) => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+
+        const dragStart = (e) => {
+            Dragging = true;
+            startXm = getX(e);
+            rake.style.transition = 'none';
+        };
+
+        const dragMove = (e) => {
+            if (!Dragging) return;
+            rentTranslate = Translate + (getX(e) - startXm);
+            rake.style.transform = `translateX(${rentTranslate}px)`;
+        };
+
+        const dragEnd = () => {
+            Dragging = false;
+            rake.style.transition = 'transform 0.5s ease-out';
+            if (rentTranslate > 0) currentTranslate = 0;
+            rake.style.transform = `translateX(${rentTranslate}px)`;
+            Translate = rentTranslate;
+        };
+
+        // --- The "Max-Width" Switch ---
+        function handleScreenChange(e) {
+            if (e.matches) {
+                // ENABLE: It is 770px or less
+                fadeInterval = setInterval(rotateQuotes, 3000);
+                rake.addEventListener('mousedown', dragStart);
+                rake.addEventListener('mousemove', dragMove);
+                window.addEventListener('mouseup', dragEnd);
+                rake.addEventListener('touchstart', dragStart);
+                rake.addEventListener('touchmove', dragMove);
+                rake.addEventListener('touchend', dragEnd);
+            } else {
+                // DISABLE: It is wider than 770px
+                clearInterval(fadeInterval);
+                rake.style.transform = 'translateX(0px)';
+                Translate = 0;
+                rentTranslate = 0;
+                
+                rake.removeEventListener('mousedown', dragStart);
+                rake.removeEventListener('mousemove', dragMove);
+                rake.removeEventListener('touchstart', dragStart);
+                rake.removeEventListener('touchmove', dragMove);
+            }
+        }
+
+        // Initial check and Listener
+        mql.addEventListener('change', handleScreenChange);
+        handleScreenChange(mql);
+    </script>
+    </div>
+    </div>
+    <div class="flex-warp-1">
+        <img class="flex-img-1" src="Multimedia/wps-office-trusted-by-unesco.png" alt="">
+        <img class="flex-img-2" src="Multimedia/aws-trusted-partner.png" alt="">
+        <img class="flex-img-3" src="Multimedia/wps-office-google-play.png" alt="">
+        <img class="flex-img-4" src="Multimedia/cnet-review.png" alt="">
+        <img class="flex-img-5" src="Multimedia/g2-leader.png" alt="">
+        <img class="flex-img-6" src="Multimedia/trustpilot-reviews.png" alt="">
+        <img class="flex-img-7" src="Multimedia/forbes-review.png" alt="">
+    </div>
+    <div class="slide-card-1-warpper">
+        <div class="slide-card-1">
+            <h3 class="reshape">WPS AI, Reshape Your Workflow</h3>
+            <div class="nav-header">
+                <button class="btn" onclick="moveSlide(-1)">❮</button>
+                <button class="btn" onclick="moveSlide(1)">❯</button>
+            </div>
+            <div class="carousel-container" id="card-22">
+                <div class="track" id="cardTrack">
+                    <div class="card mistake-free-writing-with-an-ai--spell-checker">
+                        <img src="Multimedia/mistake-free-writing-with-an-ai--spell-checker.jpg" alt="">
+                        <h4>Mistake-Free Writing with an AI Spell Checker</h4>
+                        <p>Write seamlessly with automatic, intelligent spellchecking that enhances the clarity and
+                            accuracy
+                            of your documents.</p>
+                    </div>
+                    <div class="card ai-enabled-parallel-translation">
+                        <img src="Multimedia/ai-enabled-parallel-translation.png" alt="">
+                        <h4>AI-Enabled Parallel Translation</h4>
+                        <p>Effortlessly overcome language barriers with AI parallel translations for Word and PDF
+                            documents,
+                            ensuring seamless interpretation.</p>
+                    </div>
+                    <div class="card generate-beautify-ppt">
+                        <img src="Multimedia/generate-beautify-ppt.png" alt="">
+                        <h4>Generate and Beautify PPT with just a simple click</h4>
+                        <p>Transform your ideas into stunning presentations effortlessly with the power of AI. Generate
+                            and
+                            beautify PPTs with just a simple click</p>
+                    </div>
+                    <div class="card use-ai-to-generate-content-in-wps-writer">
+                        <img src="Multimedia/use-ai-to-generate-content-in-wps-writer.png" alt="">
+                        <h4>Use AI to Generate Content in WPS Writer</h4>
+                        <p>Effortlessly generate high-quality content such as essays, blogs, and letters using the
+                            advanced
+                            AlGC algorithms integrated into WPS Writer.</p>
+                    </div>
+                    <div class="card ask-questions-about-use-ai">
+                        <img src="Multimedia/ask-questions-about-use-ai.png" alt="">
+                        <h4>Chat with PDF through AI</h4>
+                        <p>Unlock new insights & inquiries for your PDFs that you've never seen before. Engage in
+                            seamless
+                            conversations with WPS AI as it summarizes and extracts insights from your PDFs.</p>
+                    </div>
+                    <div class="card smart-photo-editing">
+                        <img src="Multimedia/smart-photo-editing.png" alt="">
+                        <h4>Smart Photo Editing</h4>
+                        <p>Explore, view, and effortlessly edit your images with WPS Photos. Enjoy advanced photo
+                            editing
+                            features including quality enhancement, element removal, and much more.</p>
+                    </div>
+                </div>
+                <div class="dots-container">
+        <div class="dot active" onclick="jump(0)"></div>
+        <div class="dot" onclick="jump(1)"></div>
+        <div class="dot" onclick="jump(2)"></div>
+        <div class="dot" onclick="jump(3)"></div>
+        <div class="dot" onclick="jump(4)"></div>
+        <div class="dot" onclick="jump(5)"></div>
+        <div class="dot" onclick="jump(6)"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let currentIndex = 0;
+        const track = document.getElementById('cardTrack');
+        const cards = document.querySelectorAll('card-22');
+        const visibleCards = 3;
+        function update() {
+            // This math moves the track by exactly 1 slide width
+            like.style.transform = `translateX(-${index * 100}%)`;
+
+            // Update dots visual state
+            dots.forEach(d => d.classList.remove('active'));
+            dots[index].classList.add('active');
+        }
+
+        function moveSlide(direction) {
+            const cardWidth = cards[0].offsetWidth;
+            const gap = 20;
+            const amountToMove = cardWidth + gap;
+
+
+            currentIndex += direction;
+
+
+            if (currentIndex < 0) {
+                currentIndex = 0;
+            } else if (currentIndex > cards.length - visibleCards) {
+                currentIndex = cards.length - visibleCards;
+            }
+            
+
+            track.style.transform = `translateX(-${currentIndex * amountToMove}px)`;
+        }
+         function jump(n) {
+            index = n;
+            update();
+        }
+
+    
+        const wrapper = document.getElementById('.card');
+
+        let isDragging = false;
+        let startX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID = 0;
+
+        // --- INTERACTION LOGIC ---
+
+        const getPosX = (e) => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+
+        const onStart = (e) => {
+            isDragging = true;
+            startX = getPosX(e);
+            track.style.transition = 'none'; // Instant drag response
+        };
+
+        const onMove = (e) => {
+            if (!isDragging) return;
+            const currentX = getPosX(e);
+            const distance = currentX - startX;
+            currentTranslate = prevTranslate + distance;
+            
+            // Sync movement with the track
+            track.style.transform = `translateX(${currentTranslate}px)`;
+        };
+
+        const onEnd = () => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+            // Calculate Boundaries (Prevents scrolling into empty space)
+            const trackWidth = track.scrollWidth;
+            const windowWidth = carouselWindow.offsetWidth;
+            const maxScroll = -(trackWidth - windowWidth + (windowWidth * 0.1));
+
+            if (currentTranslate > 0) {
+                currentTranslate = 0;
+            } else if (currentTranslate < maxScroll) {
+                currentTranslate = maxScroll;
+            }
+
+            track.style.transform = `translateX(${currentTranslate}px)`;
+            prevTranslate = currentTranslate;
+        };
+        // --- EVENT LISTENERS ---
+
+        // Mouse Events
+        track.addEventListener('mousedown', onStart);
+        track.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+
+        // Touch Events (Mobile)
+        track.addEventListener('touchstart', onStart);
+        track.addEventListener('touchmove', onMove);
+        track.addEventListener('touchend', onEnd);
+
+        // Prevent images/text inside from being dragged by browser
+        track.addEventListener('dragstart', (e) => e.preventDefault());
+    </script>
+    <div class="slide-card-2-warpper">
+        <div class="maker">
+            <div class="smarter-faster-button">
+                <div class="smarter-faster">
+                    <h3>Smarter, Faster, Easier</h3>
+                    <p>Free with Seamless MS Office Compatibility</p>
+                </div>
+                <div class="nav-header">
+                    <button class="btn" onclick="moveby(-1)">❮</button>
+                    <button class="btn" onclick="moveby(1)">❯</button>
+                </div>
+            </div>
+            <div class="carousel-warpper" id="card-33">
+                <div class="track2" id="cardTrack1">
+                    <div class="card2 card-2">
+                        <h4>Free Access to Word, Excel, and PPT Features</h4>
+                        <p>Enjoy free, unlimited access to Word, Excel, and PPT functionalities. Upgrade to WPS AI for
+                            plenty of AI features and enhanced services whenever you're ready!</p>
+                        <img src="Multimedia/free-office-software-for-microsoft-word-excel-powerpoint.png" alt="">
+                    </div>
+                    <div class="card3 card2">
+                        <h4>Boost Office Efficiency with AI Integration</h4>
+                        <p>Explore how seamless integration of AI technologies revolutionizes office workflows, enhances
+                            productivity, and streamlines operations for optimal efficiency.</p>
+                        <img src="Multimedia/boosting-office-efficiency-with-ai-integration.png" alt="">
+                    </div>
+                    <div class="card3 card2">
+                        <h4>100% Compatibility with Flawless File Handling</h4>
+                        <p>Never worry about file compatibility again. WPS Office ensures that every file opens
+                            smoothly, with no formatting issues. Your work, your way.</p>
+                        <img src="Multimedia/wps-office-compatible-with-microsoft-office.png" alt="">
+                    </div>
+                    <div class="card3 card2">
+                        <h4>Collaborative Freedom</h4>
+                        <p>Unlock seamless multi-user collaboration, enjoy complimentary cloud storage, and effortlessly
+                            handle and sync files anytime, anywhere.</p>
+                        <img src="Multimedia/share-exce-word-ppt-and-pdf-for-editing.png" alt="">
+                    </div>
+                    <div class="card3 card2">
+                        <h4>Lightweight and Lightning-Fast Document Processing</h4>
+                        <p>Experience the power of speed and efficiency. WPS Office's installation package is just
+                            214MB, yet it handles large files without a hitch. Say goodbye to lag and hello to
+                            productivity.</p>
+                        <img src="Multimedia/fast-document-processing-in-wps-office.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Your-Uninterrupted">
+            <h3>Your Uninterrupted Workspace, <br>Always Secure and Reliable</h3>
+            <div class="no-third-parties">
+                <div class="No-Tracking">
+                    <img src="Multimedia/no-tracking.svg" alt="" style="margin-top: 30px;">
+                    <h4>No Tracking</h4>
+                    <p>We respect your privacy. We do not collect any of your private data. Our data collection is
+                        limited to system usage statistics, solely for analytical purposes, and you have the control to
+                        turn it off at any time.</p>
+                </div>
+                <div class="End-to-End-Data-Encryption">
+                    <img src="Multimedia/end-to-end-data-encryption.svg" alt="" style="margin-top: 30px;">
+                    <h4>End-to-End Data Encryption</h4>
+                    <p>We take the security of your documents seriously. With WPS Office, your data is fully encrypted
+                        from start to finish, ensuring that it remains private and secure at all times.</p>
+                </div>
+                <div class="No-Third-Parties">
+                    <img src="Multimedia/no-third-parties.svg" alt="" style="margin-top: 30px;">
+                    <h4>No Third Parties</h4>
+                    <p>Rest assured, there are no third parties involved. Your work is yours alone. We do not share your
+                        data or collaborate with external parties that might compromise your privacy.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        let urrentIndex = 0;
+        const race = document.getElementById('cardTrack1');
+        const makes = document.querySelectorAll('.card2');
+        const visiblemakes = 3;
+
+        function moveby(direction) {
+
+            const cardWidth = makes[0].offsetWidth;
+            const gap = 20;
+            const amountToMove = cardWidth + gap;
+
+
+            urrentIndex += direction;
+
+
+            if (urrentIndex < 0) {
+                urrentIndex = 0;
+            } else if (urrentIndex > makes.length - visiblemakes) {
+                urrentIndex = makes.length - visiblemakes;
+            }
+
+            race.style.transform = `translateX(-${urrentIndex * amountToMove}px)`;
+        }
+    </script>
+    <div class="mixed-color">
+        <div class="maker-2">
+        <h3 class="Recognized-Excellence">Recognized Excellence</h3>
+        <p class="Explore-the-honors">Explore the honors and awards that highlight our commitment to quality and
+            innovation.</p>
+        <div class="flex-warp">
+            <div class="carousel-contain">
+                <div class="carousel-race" id="race">
+                    <div class="slide s1">
+                        <h4>WPS AI Partners with Amazon Bedrock to Enhance Office Productivity</h4>
+                        <a href="">Learn More<span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                    </div>
+                    <div class="slide s2">
+                        <h4>Leading Effective Integration of GenAI in Higher Education 2024 Southest Asia Regional</h4>
+                        <a href="">Learn More<span class="material-symbols-outlined">keyboard_arrow_right</span></a>
+                    </div>
+                </div>
+                <button class="botn pev" onclick="move(-1)">&#10094;</button>
+                <button class="botn net" onclick="move(1)">&#10095;</button>
+                <script>
+                    const like = document.getElementById('race');
+                    const dots = document.querySelectorAll('.dot');
+                    let index = 0;
+
+                   
+
+                    function move(direction) {
+                        index += direction;
+                        if (index > 1) index = 0; // Loop to start
+                        if (index < 0) index = 1; // Loop to end
+                        update();
+                    }
+
+                    function jump(n) {
+                        index = n;
+                        update();
+                    }
+
+                    // Auto-play: moves every 3 seconds
+                    // setInterval(() => move(1), 3000);
+                     const rapper = document.getElementById('card-33');
+
+        let iDragging = false;
+        let start = 0;
+        let currntTranslate = 0;
+        let prvTranslate = 0;
+        let aniationID = 0;
+
+        // --- INTERACTION LOGIC ---
+
+        const gtPosX = (e) => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+
+        const onStrt = (e) => {
+            iDragging = true;
+            start = gtPosX(e);
+            race.style.transition = 'none'; // Instant drag response
+        };
+
+        const onMve = (e) => {
+            if (!iDragging) return;
+            const currentX = gtPosX(e);
+            const distance = currentX - start;
+            currntTranslate = prvTranslate + distance;
+            
+            // Sync movement with the track
+            race.style.transform = `translateX(${currntTranslate}px)`;
+        };
+
+        const onEd = () => {
+            iDragging = false;
+            race.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+            // Calculate Boundaries (Prevents scrolling into empty space)
+            const trackWidth = race.scrollWidth;
+            const windowWidth = carouselWindow.offsetWidth;
+            const maxScroll = -(trackWidth - windowWidth + (windowWidth * 0.1));
+
+            if (currntTranslate > 0) {
+                currntTranslate = 0;
+            } else if (currntTranslate < maxScroll) {
+                currntTranslate = maxScroll;
+            }
+
+            race.style.transform = `translateX(${currntTranslate}px)`;
+            prvTranslate = currntTranslate;
+        };
+        // --- EVENT LISTENERS ---
+
+        // Mouse Events
+        race.addEventListener('mousedown', onStrt);
+        race.addEventListener('mousemove', onMve);
+        window.addEventListener('mouseup', onEd);
+
+        // Touch Events (Mobile)
+        race.addEventListener('touchstart', onStrt);
+        race.addEventListener('touchmove', onMve);
+        race.addEventListener('touchend', onEd);
+
+        // Prevent images/text inside from being dragged by browser
+        race.addEventListener('dragstart', (e) => e.preventDefault());
+                </script>
+            </div>
+            <div class="grid-contai-2">
+                <div class="UNESCO-ICHEI recommended-applications-by-unesco-ichei">
+                    <img src="Multimedia/recommended-applications-by-unesco-ichei.png" alt="">
+                    <h5>Recommended Applications</h5>
+                    <p>UNESCO-ICHEI</p>
+                </div>
+                <div class="Mac-App-Store recommended-applications-by-unesco-ichei">
+                    <img src="Multimedia/wps-office-officially-recommended-by-mac-app-store.png" alt="">
+                    <h5>Officially Recommended</h5>
+                    <p>Mac App Store</p>
+                </div>
+                <div class="Google-Play recommended-applications-by-unesco-ichei">
+                    <img src="Multimedia/google-play-rated-wps-office-as-best-app-in-2015.png" alt="">
+                    <h5>2015 Best App</h5>
+                    <p>Google Play</p>
+                </div>
+                <div class="Uptodown recommended-applications-by-unesco-ichei">
+                    <img src="Multimedia/wps-office-as-2022-users-pick-in-uptodown.png" alt="">
+                    <h5>2022 Users' Pick</h5>
+                    <p>Uptodown</p>
+                </div>
+                <div class="aws recommended-applications-by-unesco-ichei">
+                    <img src="Multimedia/aws-awarded-wps-office-as-qualified-software.png" alt="">
+                    <h5>Qualified Software</h5>
+                    <p>AWS</p>
+                </div>
+                <div class="CNet-Editors-Rating recommended-applications-by-unesco-ichei">
+                    <img src="Multimedia/wps-office-reviews-by-cnet.png" alt="">
+                    <h5>2016 Excellent</h5>
+                    <p>CNet Editors' Rating</p>
+                </div>
+            </div>
+        </div>
+         <div class="fade-container">
+        <div class="quote-text active">
+            "This is an office product that seamlessly integrates efficiency and functionality, serving as a conduit for
+            connecting people and fostering collaboration. My primary priorities lie in ensuring efficiency and
+            security, thanks to WPS Office."
+            <span class="author">
+                <h2>Swami Sivasubramanian</h2>
+                <p>CEO, AWS</p>
+            </span>
+        </div>
+        <div class="quote-text">
+            "Bid farewell to writer’s block as WPS AI effortlessly produces top-notch content through advanced
+            algorithms. Whether it’s documents or presentations, transform your creative workflow with just a few clicks
+            or voice commands."
+            <span class="author">
+                <h2 class="h2-img"><img src="Multimedia/salty-news-network.png" alt="" width="3%">Salty News Network
+                </h2>
+            </span>
+        </div>
+    </div>
+     <script>
+        // --- LOGIC FOR FADE SLIDER ---
+        const quotes = document.querySelectorAll('.quote-text');
+        let currentQuote = 0;
+
+        function showNextQuote() {
+            quotes[currentQuote].classList.remove('active');
+            currentQuote = (currentQuote + 1) % quotes.length;
+            quotes[currentQuote].classList.add('active');
+        }
+        setInterval(showNextQuote, 4000);
+         </script>
+        </div>
+    </div>
+    <div class="Voices-from-WPSists">
+        <h2>Voices from WPSists</h2>
+        <h4 class="pp">Hear what WPS Office users have to say. Discover their insights, experiences, and stories.</h4>
+        <div class="carousel-container-4" id="jump">
+            <div class="rack" id="cardTrack4">
+                <div class="card4">
+                    <div>
+                        <img src="Multimedia/college student.jpg" alt="">
+                        <p>"Al dejar la universidad, tuve que decir adiós a mi Office gratuito. WPS fue la solución
+                            perfecta. Es
+                            increíblemente similar a MS Office, así que la transición fue inmediata. ¡Y lo mejor es que
+                            es gratis!"</p>
+                    </div>
+                    <div class="college-student">
+                        <h3 class="evaluation-name" style="color:#1E5FC7; "
+                            data-v-93b5fd16="">
+                            Olivia Bennett
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="" >College
+                            Student</h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-7.5c822c5.jpg" alt="">
+                        <p>"Siempre busqué una alternativa gratuita a Microsoft Office y por fin la encontré. WPS Office
+                            me permite
+                            usar Word, Excel y PowerPoint sin pagar ni un solo euro. ¡Cumple con todo lo que necesito!
+                            Ahora se ha
+                            convertido en mi opción preferida para editar documentos."</p>
+                    </div>
+                    <div class="High-School-Student">
+                        <h3 class="evaluation-name" style="color: rgb(52, 115, 23);"
+                            data-v-93b5fd16="">
+                            Ethan Miller
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="">High School
+                            Student</h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-10.3a1b4b4.jpg" alt="">
+                        <p>“Not just the top alternative to Microsoft Office; what really draws me in is WPS´s
+                            commitment to
+                            constantly updating features to meet users’ needs. With the integration of more and more AI
+                            functions like
+                            AI Writer and AI PDF, my office efficiency has soared. I’m eagerly anticipating more
+                            surprises!”</p>
+                    </div>
+                    <div class="Human-Resources-Specialist">
+                        <h3 class="evaluation-name" style="color: rgb(196, 130, 0); "
+                            data-v-93b5fd16="">
+                            Ava Carter
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="">Human
+                            Resources Specialist</h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-11.766ca10.jpg" alt="">
+                        <p>“The reason that I tried WPS is because it is legally and free, no need to pay money. Then I
+                            found that WPS
+                            is very easy to use, no need to waste time to learn to use WPS. I can save the files in
+                            Excel format and
+                            share them directly.”</p>
+                    </div>
+                    <div class="Contributing-Writer">
+                        <h3 class="evaluation-name" style="color: rgb(30, 95, 199);"
+                            data-v-93b5fd16="">
+                            Sarah Buthelezi
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="">Contributing
+                            Writer</h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-12.d7cd57e.jpg" alt="">
+                        <p>“Fantastic "Office Suite". I mostly use the spreadsheets and honestly think it is better than
+                            the MS
+                            product.The word and presentation apps work absolutely professionally as well. All are fully
+                            compatible.
+                            Risk free. Go for it!”</p>
+                    </div>
+                    <div class="Marketing-Manager">
+                        <h3 class="evaluation-name" style="color: rgb(52, 115, 23);"
+                            data-v-93b5fd16="">
+                            Steve Karamarko
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="">Marketing
+                            Manager</h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-1.2db7430.jpg" alt="">
+                        <p>“The templates are great, I can choose each template for each day to write journals. The
+                            templates are
+                            helpful and easy to adjust. The experiences with AI are really eye-opening.”</p>
+                    </div>
+                    <div class="Journalist">
+                        <h3 class="evaluation-name" style="color: rgb(196, 130, 0);"
+                            data-v-93b5fd16="">
+                            Angela Phương Bùi
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="">Journalist
+                        </h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-2.d4d85cc.jpg" alt="">
+                        <p>“Compared to other free office apps like Libre Office, WPS Office is faster, more reliable,
+                            and can handle
+                            even the largest documents with ease. So if you're tired of paying for MS Office or
+                            struggling with slow and
+                            unreliable free office apps, give WPS Office a try!”</p>
+                    </div>
+                    <div class="IT-Engineer">
+                        <h3 class="evaluation-name" style="color: rgb(187, 39, 38); "
+                            data-v-93b5fd16="">
+                            vekoi3
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="">IT Engineer
+                        </h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-3.9506887.jpg" alt="">
+                        <p>“I love the fact that it integrates Word, Excel, PowerPoint, and PDF tools into one
+                            application, making it
+                            super convenient to use. Plus, the compatibility with other popular office software like MS
+                            Office and Libre
+                            Office is excellent.”</p>
+                    </div>
+                    <div class="High-School-Teacher">
+                        <h3 class="evaluation-name" style="color: rgb(30, 95, 199); "
+                            data-v-93b5fd16="">
+                            King&amp;zk
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="" >High School
+                            Teacher</h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-4.0102800.jpg" alt="">
+                        <p>“Enable me to share, edit and merge multiple files online or offline. It provides online
+                            storage by
+                            connecting with google drive which is great. And the tab feature is just great i can use
+                            multiple different
+                            tools all once at one place.”</p>
+                    </div>
+                    <div class="Product-Manager">
+                        <h3 class="evaluation-name" style="color: rgb(52, 115, 23); "
+                            data-v-93b5fd16="">
+                            Gaurav S.
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="">Product
+                            Manager</h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-5.4ef3f10.jpg" alt="">
+                        <p>“Esta aplicación es una barbaridad, la amo, me sacó de grandes apuros al hacer mi tesis. Para
+                            mí es y
+                            siempre será la mejor aplicación para leer, crear y editar documentos, muchas gracias por
+                            crearla.”</p>
+                    </div>
+                    <div class="University-Student">
+                        <h3 class="evaluation-name" style="color:#1E5FC7;"
+                            data-v-93b5fd16="">
+                            Iris González
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="">University
+                            Student</h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-6.776e32f.jpg" alt="">
+                        <p>“Totalmente em português. O visual é leve, intuitivo e extremamente fácil de utilizar. A
+                            opção de modelos
+                            de documentos gratuitos é muito boa. Finalizando com a ampla capacidade de lidar com
+                            arquivos PDF e
+                            disponibilizar um espaço na nuvem.”</p>
+                    </div>
+                    <div class="Freelancer">
+                        <h3 class="evaluation-name" style="color: rgb(196, 130, 0); font-size: 16px; font-size: 16px;"
+                            data-v-93b5fd16="">
+                            Josaphat Valderrama
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="" style="font-size: 20px;font-weight: 700;">Freelancer
+                        </h3>
+                    </div>
+                </div>
+                <div class="card4">
+                    <div>
+                        <img src="https://website-prod.cache.wpscdn.com/img/wps-office-user-8.a5823df.jpg" alt="">
+                        <p>“Aplikasi yang sangat membantu, semua laporan jadi mudah di akses gak perlu lagi buka PC
+                            kerja semakin
+                            satset dan mudah banget di akses di manapun dan kapanpun wps memang terbaik , semoga d
+                            updetannya makin
+                            canggih lagi”</p>
+                    </div>
+                    <div class="Software-Developer">
+                        <h3 class="evaluation-name" style="color:#1E5FC7; font-size: 16px; font-size: 16px;"
+                            data-v-93b5fd16="">
+                            bahrun
+                        </h3>
+                        <h3 class="user-role" data-v-93b5fd16="" style="font-size: 20px;font-weight: 700;">Software
+                            Developer</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nv-header">
+            <button class="bon" onclick="mover(-1)">❮</button>
+            <button class="bon" onclick="mover(1)">❯</button>
+        </div>
+        <script>
+            let Index = 0;
+            const rack = document.getElementById('cardTrack4');
+            const bags = document.querySelectorAll('.card4');
+            const visiblebags = 1;
+
+            function mover(direction) {
+                // 1. Calculate how wide one card is (including its gap)
+                const cardWidth = bags[0].offsetWidth;
+                const gap = 20; // Must match the CSS --gap
+                const amountToMove = cardWidth + gap;
+
+                // 2. Update the index based on direction
+                Index += direction;
+
+                // 3. Logic: Don't go past the end or the beginning
+                // Max index is (Total Cards - Visible Cards)
+                if (Index < 0) {
+                    Index = 0;
+                } else if (Index > bags.length - visiblebags) {
+                    Index = bags.length - visiblebags;
+                }
+
+                // 4. Move the track
+                rack.style.transform = `translateX(-${Index * amountToMove}px)`;
+                
+            }
+        </script>
+        <div>
+            <h2>Go Further with WPS Community</h2>
+            <div class="Go-Further-with-WPS">
+                <div class="What-New">
+                    <h3 class="AI-Spell-Check"><img
+                            src="https://website-prod.cache.wpscdn.com/img/what-is-new-ai-icon.26bf7f6.svg"
+                            alt="">What's New</h3>
+                    <h5 class="AI-Spell-Check fuck"><img
+                            src="https://website-prod.cache.wpscdn.com/img/ai-spell-check.5d63a86.svg" alt="">AI Spell
+                        Check <img class="baby"
+                            src="https://website-prod.cache.wpscdn.com/img/right-arrow-learn-more.1060075.svg" alt="">
+                    </h5>
+                    <h5 class="AI-Spell-Check fuck"><img
+                            src="https://website-prod.cache.wpscdn.com/img/ai-photo.3d8e9c9.svg" alt=""> AI Photos <img
+                            class="baby-2"
+                            src="https://website-prod.cache.wpscdn.com/img/right-arrow-learn-more.1060075.svg" alt="">
+                    </h5>
+                    <h5 class="AI-Spell-Check ai-slides"><img
+                            src="https://website-prod.cache.wpscdn.com/img/ai-slides.431c4d4.svg" alt="">AI Slides <img
+                            class="baby-3"
+                            src="https://website-prod.cache.wpscdn.com/img/right-arrow-learn-more.1060075.svg" alt="">
+                    </h5>
+                </div>
+                <div class="WPS-Academy">
+                    <h3>WPS Academy</h3>
+                    <a href="">Learn More <img class="were-2"
+                            src="https://website-prod.cache.wpscdn.com/img/right-arrow-learn-more.1060075.svg"
+                            alt=""></a>
+                </div>
+                <div class="follow-us">
+                    <h3>Follow US</h3>
+                    <p>Our team would love to help you find the perfect fit of products and solutions.</p>
+                    <a href="" class="were"><img class="dis"
+                            src="https://website-prod.cache.wpscdn.com/img/wps-office-discord-channel.5492798.svg"
+                            alt="">Discord <img class="cord"
+                            src="https://website-prod.cache.wpscdn.com/img/arrow_right.410c90f.svg" alt=""></a>
+                    <a href="" class="were"><img class="you"
+                            src="https://website-prod.cache.wpscdn.com/img/wps-office-youtube-channel.79ebc1e.svg"
+                            alt="">Youtube <img class="tube"
+                            src="https://website-prod.cache.wpscdn.com/img/arrow_right.410c90f.svg" alt=""></a>
+                    <a href=""><img class="face"
+                            src="https://website-prod.cache.wpscdn.com/img/wps-office-facebook-group.b6e296c.svg"
+                            alt="">Facebook <img class="book"
+                            src="https://website-prod.cache.wpscdn.com/img/arrow_right.410c90f.svg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ai-wps-office-footer-wallpapper">
+        <img class="ai-wps-office-footer-logo" src="Multimedia/ai-wps-office-footer-logo.c5f2e2c.png" alt="">
+        <h2 class="h2-88"><span class="Upgrade-your">Upgrade your workflow</span><span class="AI-Powered"> with
+                AI-Powered Office</span></h2>
+        <button class="Get---Started">
+            <h3><a href="">Get Started</a></h3>
+        </button>
+    </div>
+    <div class="footer-div">
+        <div class="Make-Busy-Work-Easy">
+            <img src="Multimedia/logo_dark.svg" alt="">
+            <b>Make Busy Work Easy</b>
+            <p>WPS SOFTWARE PTE. LTD., 6 RAFFLES QUAY #14-06 SINGAPORE (048580)</p>
+        </div>
+        <div class="Product">
+            <b>Product</b>
+            <li><a href="">WPS Office for Windows</a></li>
+            <li><a href="">WPS Office for Mac</a></li>
+            <li><a href="">WPS Office for Android</a></li>
+            <li><a href="">WPS Office for iOS</a></li>
+            <li><a href="">WPS Office for Linux</a></li>
+            <li><a href="">WPS Office for Education</a></li>
+            <li><a href="">Writer</a></li>
+            <li><a href="">Spreadsheet</a></li>
+            <li><a href="">Presentation</a></li>
+            <li><a href="">PDF</a></li>
+        </div>
+        <div class="Company">
+            <b>Company</b>
+            <li><a href="">About Us</a></li>
+            <li><a href="">Business Cooperation</a></li>
+            <li><a href="">Partners</a></li>
+            <li><a href="">Templates</a></li>
+            <li><a href="">Privacy Policy</a></li>
+            <li><a href="">Global Trust</a></li>
+        </div>
+        <div class="Support">
+            <b>Support</b>
+            <li><a href="">Feedback</a></li>
+            <li><a href="">Help Center</a></li>
+            <li><a href="">WPS Academy</a></li>
+            <li><a href="">What's New</a></li>
+            <li><a href="">Tech Specs</a></li>
+        </div>
+        <div class="Product-2">
+              <b>Product</b> <span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </div>
+        <div class="Company-2">
+            <b>Company</b><span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </div>
+        <div class="Support-2">
+             <b>Support</b><span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </div>
+        <div class="Follow-Us-2">
+            <b>Follow Us</b>
+            <li>
+                <img src="Multimedia/circle_facebook.2ab50d3 (1).svg" alt="">
+                <img src="Multimedia/circle_twitter.be63f89.svg" alt="">
+                <img src="Multimedia/circle_youtube.226033c.svg" alt="">
+            </li>
+        </div>
+    </div>
+    <div>
+        <footer class="footer-header-33">
+        <div class="lang-wrapper">
+            <button class="lang-btn" id="langBtn"> <img class="Footer_Language" src="Multimedia/Footer_Language.8a78980.svg" alt=""> English <img src="https://website-prod.cache.wpscdn.com/img/arrow_gray.46f0bbe.svg" alt=""></button>
+            <div class="lang-menu" id="langMenu">
+                <a href="#">Português</a><a href="#">Polskie</a>
+                <a href="#">Hindi</a><a href="#">Русский</a>
+                <a href="#">Melayu</a><a href="#">Filipino</a>
+                <a href="#">日本語</a><a href="#">Italiano</a>
+                <a href="#">Tiếng Việt</a><a href="#">Türkçe</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const btn = document.getElementById('langBtn');
+        const menu = document.getElementById('langMenu');
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.classList.toggle('open');
+        });
+
+        window.addEventListener('click', () => menu.classList.remove('open'));
+    </script>
+        <p class=" All-Rights-Reserved">Copyright © Kingsoft Office Software, All Rights Reserved.</p>
+    </div>
+</body>
+
+</html>

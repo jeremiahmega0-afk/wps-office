@@ -274,66 +274,70 @@
             update();
         }
 
-    
-        const wrapper = document.getElementById('.card');
+        const testmonials = document.querySelectorAll('.cardTrack');
+        const ml = window.matchMedia('(max-width: 990px)');
+        
+        let isDragging = false, startX = 0, currentTranslate = 0, prevTranslate = 0;
+        let fdeInterval;
 
-        let isDragging = false;
-        let startX = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let animationID = 0;
+        // --- Effect Logic ---
+        function rotateQuotes() {
+            let active = document.querySelector('.testimonial.active');
+            active.classList.remove('active');
+            let next = active.nextElementSibling || testimonials[0];
+            next.classList.add('active');
+        }
 
-        // --- INTERACTION LOGIC ---
+        const getXm = (e) => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
 
-        const getPosX = (e) => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-
-        const onStart = (e) => {
+        const drgStart = (e) => {
             isDragging = true;
-            startX = getPosX(e);
-            track.style.transition = 'none'; // Instant drag response
+            startX = getXm(e);
+            track.style.transition = 'none';
         };
 
-        const onMove = (e) => {
+        const drgMove = (e) => {
             if (!isDragging) return;
-            const currentX = getPosX(e);
-            const distance = currentX - startX;
-            currentTranslate = prevTranslate + distance;
-            
-            // Sync movement with the track
+            currentTranslate = prevTranslate + (getXm(e) - startX);
             track.style.transform = `translateX(${currentTranslate}px)`;
         };
 
-        const onEnd = () => {
+        const drgEnd = () => {
             isDragging = false;
-            track.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
-            // Calculate Boundaries (Prevents scrolling into empty space)
-            const trackWidth = track.scrollWidth;
-            const windowWidth = carouselWindow.offsetWidth;
-            const maxScroll = -(trackWidth - windowWidth + (windowWidth * 0.1));
-
-            if (currentTranslate > 0) {
-                currentTranslate = 0;
-            } else if (currentTranslate < maxScroll) {
-                currentTranslate = maxScroll;
-            }
-
+            track.style.transition = 'transform 0.5s ease-out';
+            if (currentTranslate > 0) currentTranslate = 0;
             track.style.transform = `translateX(${currentTranslate}px)`;
             prevTranslate = currentTranslate;
         };
-        // --- EVENT LISTENERS ---
 
-        // Mouse Events
-        track.addEventListener('mousedown', onStart);
-        track.addEventListener('mousemove', onMove);
-        window.addEventListener('mouseup', onEnd);
+        // --- The "Max-Width" Switch ---
+        function handleScreenChange(e) {
+            if (e.matches) {
+                // ENABLE: It is 770px or less
+                fdeInterval = setInterval(rotateQuotes, 3000);
+                track.addEventListener('mousedown', drgStart);
+                track.addEventListener('mousemove', drgMove);
+                window.addEventListener('mouseup', drgEnd);
+                track.addEventListener('touchstart', drgStart);
+                track.addEventListener('touchmove', drgMove);
+                track.addEventListener('touchend', drgEnd);
+            } else {
+                // DISABLE: It is wider than 770px
+                clearInterval(fdeInterval);
+                track.style.transform = 'translateX(0px)';
+                prevTranslate = 0;
+                currentTranslate = 0;
+                
+                track.removeEventListener('mousedown', drgStart);
+                track.removeEventListener('mousemove', drgMove);
+                track.removeEventListener('touchstart', drgStart);
+                track.removeEventListener('touchmove', drgMove);
+            }
+        }
 
-        // Touch Events (Mobile)
-        track.addEventListener('touchstart', onStart);
-        track.addEventListener('touchmove', onMove);
-        track.addEventListener('touchend', onEnd);
-
-        // Prevent images/text inside from being dragged by browser
-        track.addEventListener('dragstart', (e) => e.preventDefault());
+        // Initial check and Listener
+        ml.addEventListener('change', handleScreenChange);
+        handleScreenChange(ml);
     </script>
     <div class="slide-card-2-warpper">
         <div class="maker">
@@ -433,6 +437,72 @@
 
             race.style.transform = `translateX(-${urrentIndex * amountToMove}px)`;
         }
+
+        
+        const testmonial = document.querySelectorAll('.cardTrack1');
+        const m = window.matchMedia('(max-width: 990px)');
+        
+        let isDragg = false, startXmk = 0, firstTranslate = 0, lastTranslate = 0;
+        let fadInterval;
+
+        // --- Effect Logic ---
+        function rotateQuotes() {
+            let active = document.querySelector('.testimonial.active');
+            active.classList.remove('active');
+            let next = active.nextElementSibling || testimonials[0];
+            next.classList.add('active');
+        }
+
+        const getXmm = (e) => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+
+        const dgStart = (e) => {
+            isDragg = true;
+            startXmk = getXmm(e);
+            race.style.transition = 'none';
+        };
+
+        const dgMove = (e) => {
+            if (!isDragg) return;
+            firstTranslate = lastTranslate + (getXmm(e) - startXmk);
+            race.style.transform = `translateX(${firstTranslate}px)`;
+        };
+
+        const dgEnd = () => {
+            isDragg = false;
+            race.style.transition = 'transform 0.5s ease-out';
+            if (firstTranslate > 0) firstTranslate = 0;
+            race.style.transform = `translateX(${firstTranslate}px)`;
+            lastTranslate = firstTranslate;
+        };
+
+        // --- The "Max-Width" Switch ---
+        function handleScreenChange(e) {
+            if (e.matches) {
+                // ENABLE: It is 770px or less
+                fadInterval = setInterval(rotateQuotes, 3000);
+                race.addEventListener('mousedown', dgStart);
+                race.addEventListener('mousemove', dgMove);
+                window.addEventListener('mouseup', dgEnd);
+                race.addEventListener('touchstart', dgStart);
+                race.addEventListener('touchmove', dgMove);
+                race.addEventListener('touchend', dgEnd);
+            } else {
+                // DISABLE: It is wider than 770px
+                clearInterval(fadInterval);
+                race.style.transform = 'translateX(0px)';
+                lastTranslate = 0;
+                firstTranslate = 0;
+                
+                race.removeEventListener('mousedown', dgStart);
+                race.removeEventListener('mousemove', dgMove);
+                race.removeEventListener('touchstart', dgStart);
+                race.removeEventListener('touchmove', dgMove);
+            }
+        }
+
+        // Initial check and Listener
+        m.addEventListener('change', handleScreenChange);
+        handleScreenChange(m);
     </script>
     <div class="mixed-color">
         <div class="maker-2">

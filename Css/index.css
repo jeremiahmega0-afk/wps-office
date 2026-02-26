@@ -3142,7 +3142,22 @@ padding-bottom: 5px;
         font-weight: 600;
     }
 }
+@media(max-width:410px){
+    .Product-2 span {
+        padding-left: 69%;
+        font-weight: 600;
+    }
 
+    .Company-2 span {
+        padding-left: 65.5%;
+        font-weight: 600;
+    }
+
+    .Support-2 span {
+        padding-left: 69%;
+        font-weight: 600;
+    }
+}
 .footer-header-33 {
     display: flex;
     align-items: center;

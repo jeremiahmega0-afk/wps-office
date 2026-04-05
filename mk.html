@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WPS Style Dropdown</title>
+    <style>
+        /* 1. Basic Reset & Font */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 50px;
+            background-color: #f5f5f5;
+        }
+
+        /* 2. The Menu Container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 3. The Trigger Button */
+        .dropdown-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-btn:hover {
+            color: #000;
+        }
+
+        /* 4. The Hidden Menu */
+        .dropdown-content {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            padding: 8px 0;
+            margin-top: 5px;
+            list-style: none;
+            z-index: 100;
+        }
+
+        /* 5. Menu Items */
+        .dropdown-content li {
+            padding: 10px 20px;
+            font-size: 13px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .dropdown-content li:hover {
+            background-color: #f8f9fa;
+            color: #00a1ff; /* WPS blue accent */
+        }
+
+        /* 6. The Toggle Class */
+        .show {
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dropdown">
+        <button id="menuTrigger" class="dropdown-btn">
+            Language <span style="font-size: 10px;">▼</span>
+        </button>
+        
+        <ul id="menuList" class="dropdown-content">
+            <li>English</li>
+            <li>日本語</li>
+            <li>ภาษาไทย</li>
+        </ul>
+    </div>
+
+    <script>
+        const trigger = document.getElementById('menuTrigger');
+        const menu = document.getElementById('menuList');
+
+        // Toggle menu when clicking the button
+        trigger.addEventListener('click', (e) => {
+            menu.classList.toggle('show');
+            e.stopPropagation(); // Stops click from closing menu immediately
+        });
+
+        // Close menu if user clicks anywhere else on the page
+        document.addEventListener('click', (e) => {
+            if (!trigger.contains(e.target)) {
+                menu.classList.remove('show');
+            }
+        });
+    </script>
+
+</body>
+</html>
